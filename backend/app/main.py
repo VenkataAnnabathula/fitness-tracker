@@ -32,10 +32,13 @@ app = FastAPI(
     version="2.0.0",
 )
 
-# Allow the Next.js dev server to call the API
+from app.config import get_settings as _get_settings
+_settings = _get_settings()
+_origins = [o.strip() for o in _settings.ALLOWED_ORIGINS.split(",")]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

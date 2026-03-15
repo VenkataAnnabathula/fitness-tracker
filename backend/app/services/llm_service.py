@@ -19,6 +19,10 @@ settings = get_settings()
 if settings.OLLAMA_API_BASE:
     os.environ["OLLAMA_API_BASE"] = settings.OLLAMA_API_BASE
 
+# Pass Groq API key if set
+if settings.GROQ_API_KEY:
+    os.environ["GROQ_API_KEY"] = settings.GROQ_API_KEY
+
 # ── Prompt ────────────────────────────────────────────────────────────────────
 # Keep this prompt isolated so it is easy to iterate without touching service logic.
 
@@ -103,6 +107,7 @@ def parse_meal_with_llm(
 
     try:
         extra = {"think": False} if "qwen3" in settings.LLM_MODEL.lower() else {}
+        api_base = settings.OLLAMA_API_BASE if settings.LLM_MODEL.startswith("ollama/") else None
         response = litellm.completion(
             model=settings.LLM_MODEL,
             messages=[
@@ -111,8 +116,8 @@ def parse_meal_with_llm(
             ],
             temperature=0.1,
             max_tokens=800,
-            api_base=settings.OLLAMA_API_BASE if settings.LLM_MODEL.startswith("ollama/") else None,
-            extra_body=extra,
+            api_base=api_base,
+            **({"extra_body": extra} if extra else {}),
         )
 
         raw_content = response.choices[0].message.content or ""
@@ -146,13 +151,14 @@ def estimate_nutrition_with_llm(
     )
     try:
         extra = {"think": False} if "qwen3" in settings.LLM_MODEL.lower() else {}
+        api_base = settings.OLLAMA_API_BASE if settings.LLM_MODEL.startswith("ollama/") else None
         response = litellm.completion(
             model=settings.LLM_MODEL,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.1,
             max_tokens=2000,
-            api_base=settings.OLLAMA_API_BASE if settings.LLM_MODEL.startswith("ollama/") else None,
-            extra_body=extra,
+            api_base=api_base,
+            **({"extra_body": extra} if extra else {}),
         )
         raw = response.choices[0].message.content or ""
         raw = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
