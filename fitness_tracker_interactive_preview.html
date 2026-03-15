@@ -1,0 +1,620 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111111;
+  --card:#1a1a1a;
+  --card2:#222222;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --sep:rgba(255,255,255,0.06);
+  --t1:#f5f5f5;
+  --t2:#a0a0a0;
+  --t3:#606060;
+  --t4:#383838;
+  --rgb1:#7b61ff;
+  --rgb2:#00d4ff;
+  --rgb3:#ff3cac;
+  --green:#00ff87;
+  --red:#ff4757;
+  --mono:'SF Mono','Menlo',monospace;
+  --sans:'Inter',system-ui,sans-serif;
+}
+body{font-family:var(--sans);background:#000;display:flex;justify-content:center;padding:20px 0 40px;-webkit-font-smoothing:antialiased;}
+.device{width:390px;background:var(--bg);border-radius:44px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 0 0 1px rgba(123,97,255,0.15),0 40px 80px rgba(0,0,0,0.8);}
+.screen{display:none;min-height:720px;background:var(--bg);}
+.screen.active{display:flex;flex-direction:column;}
+.scroll{flex:1;overflow-y:auto;padding:52px 18px 90px;scrollbar-width:none;}
+.scroll::-webkit-scrollbar{display:none;}
+
+.g{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px 18px;margin-bottom:10px;}
+.g-sm{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
+
+.pg-sup{font-size:11px;color:var(--t3);letter-spacing:0.06em;margin-bottom:3px;text-transform:uppercase;}
+.pg-h{font-size:26px;font-weight:300;color:var(--t1);margin-bottom:18px;letter-spacing:-0.5px;}
+.sec{font-size:10px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
+.lbl{font-size:12px;color:var(--t2);margin-bottom:6px;letter-spacing:0.01em;}
+
+.row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--sep);}
+.row:last-child{border-bottom:none;padding-bottom:0;}
+.rn{font-size:14px;color:var(--t1);font-weight:300;}
+.rm{font-size:11px;color:var(--t3);margin-top:2px;}
+.rv{font-size:13px;font-family:var(--mono);color:var(--t2);}
+
+.m2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.m4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:10px;}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:13px 14px;}
+.mc .l{font-size:9px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;}
+.mc .v{font-size:20px;font-weight:300;color:var(--t1);font-family:var(--mono);letter-spacing:-0.5px;}
+.mc .v span{font-size:11px;color:var(--t3);font-weight:300;letter-spacing:0;}
+
+.mb{margin-bottom:13px;}
+.mb:last-child{margin-bottom:0;}
+.mbt{display:flex;justify-content:space-between;font-size:12px;color:var(--t1);margin-bottom:6px;font-weight:300;}
+.mbv{font-family:var(--mono);color:var(--t2);font-size:11px;}
+.mbr{height:3px;background:rgba(255,255,255,0.07);border-radius:99px;overflow:hidden;}
+.mbf{height:100%;border-radius:99px;}
+
+.inp{width:100%;padding:12px 14px;border:1px solid var(--border2);border-radius:13px;font-size:15px;background:var(--card2);color:var(--t1);outline:none;font-family:var(--sans);font-weight:300;transition:border-color .15s;margin-bottom:12px;}
+.inp:focus{border-color:var(--rgb1);}
+textarea.inp{resize:none;min-height:80px;line-height:1.55;}
+.sel-inp{width:100%;padding:12px 14px;border:1px solid var(--border2);border-radius:13px;font-size:15px;background:var(--card2);color:var(--t1);outline:none;font-family:var(--sans);font-weight:300;margin-bottom:12px;appearance:none;}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.triple{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--rgb1),var(--rgb2));color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:opacity .15s;letter-spacing:0.01em;}
+.btn:active{opacity:.75;}
+.btn-o{padding:11px 16px;border:1px solid var(--border2);border-radius:12px;font-size:13px;color:var(--t2);background:var(--card2);cursor:pointer;font-family:var(--sans);font-weight:400;}
+
+.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:13px;}
+.tb{padding:9px 4px;border-radius:11px;border:1px solid var(--border);background:var(--card2);font-size:11px;font-weight:500;color:var(--t2);cursor:pointer;text-align:center;transition:all .18s;}
+.tb.on{background:var(--rgb1);color:#fff;border-color:var(--rgb1);}
+
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:13px;}
+.ab{padding:12px 4px 9px;border-radius:14px;border:1px solid var(--border);background:var(--card2);display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:all .18s;}
+.ab.on{background:var(--card);border-color:var(--rgb1);box-shadow:0 0 12px rgba(123,97,255,0.25);}
+.ai{width:20px;height:20px;stroke:var(--t3);}
+.ab.on .ai{stroke:var(--rgb1);}
+.al{font-size:9px;font-weight:500;color:var(--t3);letter-spacing:.05em;text-transform:uppercase;}
+.ab.on .al{color:var(--rgb1);}
+
+.steps{display:flex;align-items:center;gap:6px;margin-bottom:18px;}
+.sd{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;}
+.sd.a{background:var(--rgb1);color:#fff;}
+.sd.d{background:var(--card2);color:var(--t2);}
+.sd.i{background:var(--card2);color:var(--t3);}
+.sl{flex:1;height:.5px;background:var(--sep);}
+.st{font-size:11px;color:var(--t3);}
+.st.cur{color:var(--t1);font-weight:500;}
+
+.pt{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--card);margin-bottom:12px;}
+.ph{display:grid;grid-template-columns:1fr 46px 50px 26px;gap:5px;padding:8px 11px;background:var(--card2);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;font-weight:500;}
+.pr{display:grid;grid-template-columns:1fr 46px 50px 26px;gap:5px;padding:7px 9px;border-top:1px solid var(--sep);align-items:center;}
+.pr input{margin:0;padding:5px 7px;font-size:12px;border:1px solid var(--border2);border-radius:8px;background:var(--card2);color:var(--t1);outline:none;font-family:var(--sans);width:100%;}
+.rm{font-size:14px;color:var(--t3);background:none;border:none;cursor:pointer;padding:0;width:26px;text-align:center;}
+.add-r{width:100%;padding:9px;font-size:11px;color:var(--rgb1);background:transparent;border:none;border-top:1px solid var(--sep);cursor:pointer;font-family:var(--sans);}
+
+.nav{display:flex;background:rgba(10,10,10,0.95);border-top:1px solid var(--border);backdrop-filter:blur(20px);}
+.nb{flex:1;padding:9px 2px 12px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:8px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);transition:color .15s;font-family:var(--sans);}
+.nb.on{color:var(--rgb1);}
+.ni{width:20px;height:20px;}
+
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:500;background:rgba(123,97,255,0.15);color:var(--rgb1);}
+
+.tab-bar{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--card2);border-radius:11px;padding:3px;margin-bottom:14px;}
+.tab{padding:8px;border-radius:9px;font-size:13px;font-weight:400;background:transparent;border:none;cursor:pointer;color:var(--t3);transition:all .18s;font-family:var(--sans);}
+.tab.on{background:var(--card);color:var(--t1);border:1px solid var(--border2);}
+
+.ds{display:flex;gap:8px;margin-bottom:16px;}
+.db{flex:1;padding:10px;border-radius:13px;border:1px solid var(--border);background:var(--card);font-size:12px;font-weight:400;color:var(--t3);cursor:pointer;text-align:center;transition:all .18s;font-family:var(--sans);}
+.db.on{background:var(--card2);color:var(--t1);border-color:var(--rgb1);box-shadow:0 0 16px rgba(123,97,255,0.2);}
+
+.streak-grid{display:flex;gap:5px;}
+.streak-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.streak-dot{width:100%;aspect-ratio:1;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:var(--t3);}
+.streak-dot.hit{background:linear-gradient(135deg,var(--rgb1),var(--rgb2));border-color:transparent;color:#fff;}
+.streak-lbl{font-size:9px;color:var(--t3);}
+
+.ob-prog{display:flex;gap:4px;margin-bottom:24px;}
+.ob-dot{flex:1;height:2px;border-radius:99px;background:var(--card2);}
+.ob-dot.done{background:linear-gradient(90deg,var(--rgb1),var(--rgb2));}
+.gender-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;}
+.gb{padding:13px 8px;border-radius:13px;border:1px solid var(--border);background:var(--card2);font-size:13px;font-weight:400;color:var(--t2);cursor:pointer;text-align:center;transition:all .18s;font-family:var(--sans);}
+.gb.on{background:var(--card);border-color:var(--rgb1);color:var(--t1);box-shadow:0 0 12px rgba(123,97,255,0.2);}
+
+.ok{text-align:center;padding:2.5rem 0 1rem;}
+.okr{width:56px;height:56px;border-radius:50%;border:1px solid var(--border2);background:var(--card2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;}
+
+.avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--rgb1),var(--rgb3));display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:300;color:#fff;font-family:var(--mono);flex-shrink:0;}
+.adj-row{display:flex;gap:6px;justify-content:center;margin-top:12px;}
+.adj{padding:7px 13px;border:1px solid var(--border2);border-radius:9px;font-size:13px;color:var(--t2);background:var(--card2);cursor:pointer;font-family:var(--sans);}
+.adj:hover{border-color:var(--rgb1);color:var(--t1);}
+
+.rgb-ring{stroke:url(#rg);}
+</style>
+
+<!-- ONBOARDING -->
+<div id="s-ob" class="screen active">
+  <div class="scroll">
+    <div id="ob1">
+      <div style="margin-bottom:28px;margin-top:8px">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:rgba(123,97,255,0.12);border:1px solid rgba(123,97,255,0.25);margin-bottom:18px">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--rgb1);"></div>
+          <span style="font-size:11px;color:var(--rgb1);font-weight:500;letter-spacing:0.04em">FitTrack</span>
+        </div>
+        <p class="pg-h" style="font-size:32px;margin-bottom:8px">Welcome</p>
+        <p style="font-size:14px;color:var(--t2);font-weight:300;line-height:1.65">We'll personalise your calorie goals and track your progress.</p>
+      </div>
+      <div class="ob-prog"><div class="ob-dot done"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
+      <p class="lbl">First name</p>
+      <input class="inp" id="ob-name" placeholder="Alex">
+      <p class="lbl">Age</p>
+      <input class="inp" id="ob-age" type="number" placeholder="28" min="10" max="100">
+      <p class="lbl">Gender</p>
+      <div class="gender-grid">
+        <button class="gb on" onclick="selG(this)">Male</button>
+        <button class="gb" onclick="selG(this)">Female</button>
+        <button class="gb" onclick="selG(this)">Other</button>
+      </div>
+      <button class="btn" onclick="goOb(2)">Continue →</button>
+    </div>
+
+    <div id="ob2" style="display:none">
+      <p class="pg-sup">Step 2 of 4</p>
+      <p class="pg-h">Your body</p>
+      <div class="ob-prog"><div class="ob-dot done"></div><div class="ob-dot done"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
+      <div class="dual">
+        <div><p class="lbl">Weight (kg)</p><input class="inp" id="ob-wt" type="number" placeholder="72.0" step="0.1"></div>
+        <div><p class="lbl">Height (cm)</p><input class="inp" id="ob-ht" type="number" placeholder="175"></div>
+      </div>
+      <p class="lbl">Waist (cm) — optional</p>
+      <input class="inp" id="ob-waist" type="number" placeholder="82">
+      <button class="btn" onclick="goOb(3)">Continue →</button>
+    </div>
+
+    <div id="ob3" style="display:none">
+      <p class="pg-sup">Step 3 of 4</p>
+      <p class="pg-h">Activity level</p>
+      <div class="ob-prog"><div class="ob-dot done"></div><div class="ob-dot done"></div><div class="ob-dot done"></div><div class="ob-dot"></div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+        <button class="gb" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selAL(this,1.2)"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Sedentary</div><div style="font-size:11px;color:var(--t3)">Little or no exercise</div></button>
+        <button class="gb on" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selAL(this,1.375)"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Lightly active</div><div style="font-size:11px;color:var(--t3)">1–3 days/week</div></button>
+        <button class="gb" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selAL(this,1.55)"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Moderately active</div><div style="font-size:11px;color:var(--t3)">3–5 days/week</div></button>
+        <button class="gb" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selAL(this,1.725)"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Very active</div><div style="font-size:11px;color:var(--t3)">6–7 days/week</div></button>
+      </div>
+      <button class="btn" onclick="goOb(4)">Continue →</button>
+    </div>
+
+    <div id="ob4" style="display:none">
+      <p class="pg-sup">Step 4 of 4</p>
+      <p class="pg-h">Your goal</p>
+      <div class="ob-prog"><div class="ob-dot done"></div><div class="ob-dot done"></div><div class="ob-dot done"></div><div class="ob-dot done"></div></div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+        <button class="gb on" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selGoal(this,'lose')"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Lose weight</div><div style="font-size:11px;color:var(--t3)">500 kcal daily deficit</div></button>
+        <button class="gb" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selGoal(this,'maintain')"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Maintain weight</div><div style="font-size:11px;color:var(--t3)">Eat at TDEE</div></button>
+        <button class="gb" style="text-align:left;padding:14px 16px;border-radius:14px" onclick="selGoal(this,'gain')"><div style="font-size:13px;color:var(--t1);margin-bottom:2px;font-weight:400">Gain muscle</div><div style="font-size:11px;color:var(--t3)">200 kcal surplus</div></button>
+      </div>
+      <button class="btn" onclick="finishOb()">Get started</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;flex-direction:column;min-height:720px;">
+
+<!-- DASHBOARD -->
+<div id="s-dash" class="screen active">
+  <div class="scroll">
+    <p class="pg-sup" id="dash-date">Saturday, March 15</p>
+    <p class="pg-h" id="dash-greet">Good morning, Alex</p>
+    <div class="ds">
+      <button class="db on" onclick="switchDash('today',this)">Today</button>
+      <button class="db" onclick="switchDash('progress',this)">Progress</button>
+    </div>
+
+    <!-- TODAY -->
+    <div id="dash-today">
+      <div class="g" style="display:flex;align-items:center;gap:18px;">
+        <div style="position:relative;flex-shrink:0;">
+          <svg width="94" height="94" style="transform:rotate(-90deg)">
+            <defs>
+              <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7b61ff"/>
+                <stop offset="100%" stop-color="#00d4ff"/>
+              </linearGradient>
+            </defs>
+            <circle cx="47" cy="47" r="38" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="7"/>
+            <circle cx="47" cy="47" r="38" fill="none" class="rgb-ring" stroke-width="7" stroke-dasharray="239" stroke-dashoffset="72" stroke-linecap="round" style="transition:stroke-dashoffset .7s ease"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <span id="cal-in-d" style="font-size:15px;font-weight:400;font-family:var(--mono);color:var(--t1);letter-spacing:-0.5px">1,840</span>
+            <span style="font-size:9px;color:var(--t3);letter-spacing:.05em;margin-top:1px">kcal in</span>
+          </div>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+          <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;font-weight:500;margin-bottom:3px">Goal</div><div id="cal-goal-d" style="font-size:15px;font-weight:300;font-family:var(--mono);color:var(--t1)">2,000</div></div>
+          <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;font-weight:500;margin-bottom:3px">Burned</div><div style="font-size:15px;font-weight:300;font-family:var(--mono);color:var(--t1)">512</div></div>
+          <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;font-weight:500;margin-bottom:3px">Net</div><div style="font-size:15px;font-weight:300;font-family:var(--mono);color:var(--t1)">1,328</div></div>
+          <div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;font-weight:500;margin-bottom:3px">Deficit</div><div style="font-size:15px;font-weight:300;font-family:var(--mono);color:var(--green)">672</div></div>
+        </div>
+      </div>
+
+      <div class="g">
+        <p class="sec">Nutrients</p>
+        <div class="mb"><div class="mbt"><span>Protein</span><span class="mbv">142 / 160g</span></div><div class="mbr"><div class="mbf" style="width:89%;background:linear-gradient(90deg,#7b61ff,#00d4ff)"></div></div></div>
+        <div class="mb"><div class="mbt"><span>Carbs</span><span class="mbv">210 / 250g</span></div><div class="mbr"><div class="mbf" style="width:84%;background:linear-gradient(90deg,#00d4ff,#00ff87)"></div></div></div>
+        <div class="mb"><div class="mbt"><span>Fat</span><span class="mbv">55 / 65g</span></div><div class="mbr"><div class="mbf" style="width:85%;background:linear-gradient(90deg,#ff3cac,#7b61ff)"></div></div></div>
+        <div class="mb"><div class="mbt"><span>Fibre</span><span class="mbv">18 / 30g</span></div><div class="mbr"><div class="mbf" style="width:60%;background:rgba(255,255,255,0.2)"></div></div></div>
+      </div>
+
+      <div class="g">
+        <p class="sec">Meals today</p>
+        <div class="row"><div><div class="rn">Breakfast</div><div class="rm">3 items</div></div><div class="rv">480 kcal</div></div>
+        <div class="row"><div><div class="rn">Lunch</div><div class="rm">4 items</div></div><div class="rv">720 kcal</div></div>
+        <div class="row"><div><div class="rn">Snack</div><div class="rm">1 item</div></div><div class="rv">180 kcal</div></div>
+      </div>
+
+      <div class="g">
+        <p class="sec">Activity</p>
+        <div class="row"><div><div class="rn">Morning run</div><div class="rm">28 min</div></div><div class="rv" style="color:var(--green)">−290 kcal</div></div>
+        <div class="row"><div><div class="rn">Strength</div><div class="rm">35 min</div></div><div class="rv" style="color:var(--green)">−222 kcal</div></div>
+      </div>
+
+      <div class="g" style="display:flex;justify-content:space-between;align-items:center;">
+        <div><p class="sec" style="margin-bottom:3px">Weight today</p>
+          <div style="display:flex;align-items:baseline;gap:5px">
+            <span style="font-size:30px;font-weight:200;font-family:var(--mono);color:var(--t1);letter-spacing:-1px">72.4</span>
+            <span style="font-size:13px;color:var(--t3)">kg</span>
+          </div>
+        </div>
+        <button class="btn-o" onclick="switchTo('wt')">Log</button>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div id="dash-progress" style="display:none">
+      <div class="m2">
+        <div class="mc"><div class="l">Start weight</div><div class="v">75.2<span> kg</span></div></div>
+        <div class="mc"><div class="l">Current</div><div class="v">72.4<span> kg</span></div></div>
+        <div class="mc"><div class="l">Lost</div><div class="v" style="color:var(--green)">−2.8<span> kg</span></div></div>
+        <div class="mc"><div class="l">Streak</div><div class="v" style="color:var(--rgb2)">6<span> days</span></div></div>
+      </div>
+
+      <div class="g">
+        <p class="sec">Weight trend — 30 days</p>
+        <svg viewBox="0 0 320 72" width="100%" height="72" style="overflow:visible">
+          <defs><linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7b61ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+          <polyline points="0,58 40,52 80,56 120,38 160,42 200,28 240,32 280,18 320,12" fill="none" stroke="url(#lg2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="320" cy="12" r="3.5" fill="#00d4ff"/>
+          <text x="0" y="70" font-size="9" fill="#606060" font-family="var(--mono)">Feb 14</text>
+          <text x="268" y="70" font-size="9" fill="#606060" font-family="var(--mono)">Mar 15</text>
+        </svg>
+      </div>
+
+      <div class="g">
+        <p class="sec">Deficit streak — last 7 days</p>
+        <div class="streak-grid">
+          <div class="streak-day"><div class="streak-dot hit">M</div><div class="streak-lbl">✓</div></div>
+          <div class="streak-day"><div class="streak-dot hit">T</div><div class="streak-lbl">✓</div></div>
+          <div class="streak-day"><div class="streak-dot" style="color:var(--t3)">W</div><div class="streak-lbl">—</div></div>
+          <div class="streak-day"><div class="streak-dot hit">T</div><div class="streak-lbl">✓</div></div>
+          <div class="streak-day"><div class="streak-dot hit">F</div><div class="streak-lbl">✓</div></div>
+          <div class="streak-day"><div class="streak-dot hit">S</div><div class="streak-lbl">✓</div></div>
+          <div class="streak-day"><div class="streak-dot hit">S</div><div class="streak-lbl">✓</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--t2);margin-top:12px;font-weight:300">6-day streak · avg −580 kcal/day</p>
+      </div>
+
+      <div class="g">
+        <p class="sec">Workout frequency — this week</p>
+        <div style="display:flex;gap:5px;align-items:flex-end;height:80px;margin-bottom:8px">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:55%;background:linear-gradient(180deg,var(--rgb1),var(--rgb2));border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">M</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:90%;background:linear-gradient(180deg,var(--rgb1),var(--rgb2));border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">T</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:4%;background:var(--card2);border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">W</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:42%;background:linear-gradient(180deg,var(--rgb1),var(--rgb3));border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">T</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:65%;background:linear-gradient(180deg,var(--rgb1),var(--rgb2));border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">F</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:100%;background:linear-gradient(180deg,var(--rgb1),var(--rgb2));border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">S</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><div style="width:100%;height:50%;background:linear-gradient(180deg,var(--rgb3),var(--rgb1));border-radius:5px 5px 0 0;"></div><div style="font-size:9px;color:var(--t3)">S</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--t2);font-weight:300">6 of 7 days active this week</p>
+      </div>
+
+      <div class="g">
+        <p class="sec">Body measurements</p>
+        <div class="row"><div><div class="rn">Waist</div><div class="rm">Mar 15</div></div><div class="rv">82 cm</div></div>
+        <div class="row"><div><div class="rn">Start waist</div><div class="rm">Feb 14</div></div><div class="rv">86 cm</div></div>
+        <div class="row"><div><div class="rn">Change</div></div><div class="rv" style="color:var(--green)">−4 cm</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MEALS -->
+<div id="s-meal" class="screen">
+  <div class="scroll">
+    <p class="pg-sup">Log food</p>
+    <p class="pg-h">Add meal</p>
+    <div id="ms1">
+      <div class="steps"><div class="sd a">1</div><span class="st cur">Describe</span><div class="sl"></div><div class="sd i">2</div><span class="st">Review</span><div class="sl"></div><div class="sd i">3</div><span class="st">Done</span></div>
+      <p class="lbl" style="margin-bottom:7px">Meal type</p>
+      <div class="tg">
+        <button class="tb on" onclick="selTb(this)">Breakfast</button>
+        <button class="tb" onclick="selTb(this)">Lunch</button>
+        <button class="tb" onclick="selTb(this)">Dinner</button>
+        <button class="tb" onclick="selTb(this)">Snack</button>
+      </div>
+      <p class="lbl">What did you eat?</p>
+      <textarea class="inp" id="meal-txt" placeholder="e.g. 2 boiled eggs, 1 banana, and a cup of chicken curry with rice"></textarea>
+      <p style="font-size:11px;color:var(--t3);margin-top:-8px;margin-bottom:14px;line-height:1.55">AI parses your description into food items.</p>
+      <button class="btn" onclick="goMs(2)">Parse meal</button>
+    </div>
+    <div id="ms2" style="display:none">
+      <div class="steps"><div class="sd d">✓</div><span class="st">Describe</span><div class="sl"></div><div class="sd a">2</div><span class="st cur">Review</span><div class="sl"></div><div class="sd i">3</div><span class="st">Done</span></div>
+      <div class="g" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><p style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;font-weight:500;margin-bottom:3px">Meal</p><p id="mtl" style="font-size:15px;font-weight:300;color:var(--t1)">Breakfast</p></div><span class="pill">4 items</span></div>
+      <p class="lbl" style="margin-bottom:7px">Review &amp; edit</p>
+      <div class="pt">
+        <div class="ph"><span>Food</span><span>Qty</span><span>Unit</span><span></span></div>
+        <div class="pr"><input value="Boiled egg"><input value="2" type="number"><input value="count"><button class="rm" onclick="this.closest('.pr').remove()">×</button></div>
+        <div class="pr"><input value="Banana"><input value="1" type="number"><input value="count"><button class="rm" onclick="this.closest('.pr').remove()">×</button></div>
+        <div class="pr"><input value="Chicken curry"><input value="1" type="number"><input value="cup"><button class="rm" onclick="this.closest('.pr').remove()">×</button></div>
+        <div class="pr"><input value="White rice"><input value="1" type="number"><input value="cup"><button class="rm" onclick="this.closest('.pr').remove()">×</button></div>
+        <button class="add-r" onclick="addPr()">+ Add item</button>
+      </div>
+      <div style="display:flex;gap:8px"><button class="btn-o" style="flex:1" onclick="goMs(1)">← Back</button><button class="btn" style="flex:2" onclick="goMs(3)">Confirm & save</button></div>
+    </div>
+    <div id="ms3" style="display:none" class="ok">
+      <div class="okr"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="url(#rg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2 style="font-size:20px;font-weight:300;color:var(--t1);margin-bottom:5px;letter-spacing:-0.3px">Meal logged</h2>
+      <p style="font-size:14px;color:var(--t2);margin-bottom:1.75rem;font-weight:300">640 kcal added to today</p>
+      <div style="display:flex;gap:8px"><button class="btn-o" style="flex:1" onclick="resetMs()">Log another</button><button class="btn" style="flex:1" onclick="switchTo('dash')">Dashboard</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITY -->
+<div id="s-act" class="screen">
+  <div class="scroll">
+    <p class="pg-sup">Log exercise</p>
+    <p class="pg-h">Add activity</p>
+    <div id="act-form">
+      <p class="lbl" style="margin-bottom:8px">Activity type</p>
+      <div class="ag">
+        <button class="ab on" onclick="selAb(this,'Running',10)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="13" cy="4" r="1.5"/><path d="M7 21l3-6 2 2 3-4 3 5M6 13l2-4 4 2 2-4"/></svg><span class="al">Run</span></button>
+        <button class="ab" onclick="selAb(this,'Cycling',8)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="6" cy="15" r="3"/><circle cx="18" cy="15" r="3"/><path d="M6 15l3-6h5l2 3M14 9l2 3"/></svg><span class="al">Cycle</span></button>
+        <button class="ab" onclick="selAb(this,'Swimming',9)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M2 16c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><circle cx="14" cy="6" r="2"/></svg><span class="al">Swim</span></button>
+        <button class="ab" onclick="selAb(this,'Walking',4)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="4" r="1.5"/><path d="M9 20l1-5 2 2 1-5M8 10l1-3 4 1 2 3"/></svg><span class="al">Walk</span></button>
+        <button class="ab" onclick="selAb(this,'Strength',7)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M6 5h2v14H6zM16 5h2v14h-2zM8 12h8M3 7h3M18 7h3M3 17h3M18 17h3"/></svg><span class="al">Lift</span></button>
+        <button class="ab" onclick="selAb(this,'Yoga',3)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="4" r="1.5"/><path d="M8 18l4-8 4 8M4 12c2 0 4-1 4-3M20 12c-2 0-4-1-4-3"/></svg><span class="al">Yoga</span></button>
+        <button class="ab" onclick="selAb(this,'HIIT',12)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 2 13 9 13 9 22 22 11 15 11"/></svg><span class="al">HIIT</span></button>
+        <button class="ab" onclick="selAb(this,'Other',6)"><svg class="ai" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg><span class="al">Other</span></button>
+      </div>
+      <div class="dual">
+        <div><p class="lbl">Duration (min)</p><input class="inp" id="adur" type="number" value="30" min="1" oninput="updAcal()"></div>
+        <div><p class="lbl">Calories burned</p><input class="inp" id="acal" type="number" value="300"></div>
+      </div>
+      <p id="ahint" style="font-size:11px;color:var(--t3);margin-top:-8px;margin-bottom:12px;line-height:1.5">~10 kcal/min estimate. Adjust as needed.</p>
+      <div class="g-sm" style="margin-bottom:14px;">
+        <p style="font-size:12px;color:var(--t1);font-weight:500;margin-bottom:8px">Phone step count</p>
+        <div class="dual">
+          <div><p class="lbl">Steps today</p><input class="inp" style="margin-bottom:0" id="steps-inp" type="number" placeholder="8,420" oninput="calcStepCal()"></div>
+          <div><p class="lbl">Cal from steps</p><input class="inp" style="margin-bottom:0" id="step-cal" type="number" placeholder="auto" readonly style="color:var(--t2)"></div>
+        </div>
+      </div>
+      <p class="lbl">Notes (optional)</p>
+      <input class="inp" placeholder="e.g. Morning run, felt strong">
+      <button class="btn" onclick="showActDone()">Save activity</button>
+    </div>
+    <div id="act-done" style="display:none" class="ok">
+      <div class="okr"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="url(#rg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2 style="font-size:20px;font-weight:300;color:var(--t1);margin-bottom:5px">Activity logged</h2>
+      <p id="act-sum" style="font-size:14px;color:var(--t2);margin-bottom:1.75rem;font-weight:300">Running · 30 min · 300 kcal</p>
+      <div style="display:flex;gap:8px"><button class="btn-o" style="flex:1" onclick="resetAct()">Log another</button><button class="btn" style="flex:1" onclick="switchTo('dash')">Dashboard</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- WEIGHT -->
+<div id="s-wt" class="screen">
+  <div class="scroll">
+    <p class="pg-sup">Daily check-in</p>
+    <p class="pg-h">Log weight</p>
+    <div id="wt-form">
+      <div class="g" style="text-align:center;padding:28px 18px;">
+        <p class="lbl" style="margin-bottom:14px">Weight in kg</p>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:16px">
+          <input id="wt-val" type="number" step="0.1" min="20" max="300" value="72.4" style="border:none;outline:none;background:transparent;font-size:52px;font-weight:200;font-family:var(--mono);text-align:center;width:165px;color:var(--t1);letter-spacing:-2px;">
+          <span style="font-size:18px;color:var(--t3);font-weight:300">kg</span>
+        </div>
+        <div class="adj-row">
+          <button class="adj" onclick="adjWt(-0.5)">−0.5</button>
+          <button class="adj" onclick="adjWt(-0.1)">−0.1</button>
+          <button class="adj" onclick="adjWt(0.1)">+0.1</button>
+          <button class="adj" onclick="adjWt(0.5)">+0.5</button>
+        </div>
+      </div>
+      <p class="lbl" style="margin-top:12px">Waist (cm) — optional</p>
+      <input class="inp" id="wt-waist" type="number" placeholder="82">
+      <p class="lbl">Date</p>
+      <input class="inp" id="wt-date" type="date" value="2026-03-15">
+      <button class="btn" onclick="saveWt()">Save weight</button>
+    </div>
+    <div id="wt-done" style="display:none" class="ok">
+      <div class="okr"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><polyline points="3,10 8,15 17,5" stroke="url(#rg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2 style="font-size:20px;font-weight:300;color:var(--t1);margin-bottom:5px">Weight saved</h2>
+      <p id="wt-sum" style="font-size:14px;color:var(--t2);margin-bottom:1.75rem;font-weight:300">72.4 kg</p>
+      <div style="display:flex;gap:8px"><button class="btn-o" style="flex:1" onclick="resetWt()">Edit</button><button class="btn" style="flex:1" onclick="switchTo('dash')">Dashboard</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="s-prof" class="screen">
+  <div class="scroll">
+    <p class="pg-sup">Account</p>
+    <p class="pg-h">Profile</p>
+    <div class="g" style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
+      <div class="avatar" id="prof-av">A</div>
+      <div>
+        <p style="font-size:20px;font-weight:300;color:var(--t1);letter-spacing:-0.3px" id="prof-nm">Alex</p>
+        <p style="font-size:12px;color:var(--t2);margin-top:4px" id="prof-tdee">TDEE: 2,340 kcal/day</p>
+        <p style="font-size:12px;color:var(--rgb1);margin-top:2px" id="prof-gl">Goal: Lose weight</p>
+      </div>
+    </div>
+    <div class="g" style="margin-bottom:10px">
+      <p class="sec">Personal</p>
+      <div class="dual" style="margin-bottom:10px">
+        <div><p class="lbl">Name</p><input class="inp" style="margin-bottom:0" id="pf-name" value="Alex"></div>
+        <div><p class="lbl">Age</p><input class="inp" style="margin-bottom:0" id="pf-age" type="number" value="28"></div>
+      </div>
+      <p class="lbl" style="margin-top:10px">Gender</p>
+      <div class="gender-grid" style="margin-top:6px">
+        <button class="gb on" onclick="selPG(this)">Male</button>
+        <button class="gb" onclick="selPG(this)">Female</button>
+        <button class="gb" onclick="selPG(this)">Other</button>
+      </div>
+    </div>
+    <div class="g" style="margin-bottom:10px">
+      <p class="sec">Body stats</p>
+      <div class="triple">
+        <div><p class="lbl">Weight (kg)</p><input class="inp" style="margin-bottom:0" id="pf-wt" type="number" value="72.4" step="0.1"></div>
+        <div><p class="lbl">Height (cm)</p><input class="inp" style="margin-bottom:0" id="pf-ht" type="number" value="175"></div>
+        <div><p class="lbl">Waist (cm)</p><input class="inp" style="margin-bottom:0" id="pf-waist" type="number" value="82"></div>
+      </div>
+    </div>
+    <div class="g" style="margin-bottom:10px">
+      <p class="sec">Goal &amp; activity</p>
+      <p class="lbl">Goal</p>
+      <select class="sel-inp" id="pf-goal">
+        <option value="lose">Lose weight (−500 kcal/day)</option>
+        <option value="maintain">Maintain weight</option>
+        <option value="gain">Gain muscle (+200 kcal/day)</option>
+      </select>
+      <p class="lbl">Activity level</p>
+      <select class="sel-inp" style="margin-bottom:0" id="pf-al">
+        <option value="1.2">Sedentary</option>
+        <option value="1.375" selected>Lightly active</option>
+        <option value="1.55">Moderately active</option>
+        <option value="1.725">Very active</option>
+      </select>
+    </div>
+    <div class="g" style="margin-bottom:14px">
+      <p class="sec">Daily targets</p>
+      <div class="row"><div class="rn">Calorie goal</div><div class="rv" id="pf-cal-goal" style="color:var(--rgb1)">2,000 kcal</div></div>
+      <div class="row"><div class="rn">Protein</div><div class="rv">160 g</div></div>
+      <div class="row"><div class="rn">Carbs</div><div class="rv">250 g</div></div>
+      <div class="row"><div class="rn">Fat</div><div class="rv">65 g</div></div>
+    </div>
+    <button class="btn" onclick="saveProf()">Save changes</button>
+    <p id="prof-saved" style="display:none;text-align:center;margin-top:12px;font-size:12px;color:var(--rgb1)">Changes saved ✓</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav" id="main-nav">
+  <button class="nb on" id="nav-dash" onclick="switchTo('dash')">
+    <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    Home
+  </button>
+  <button class="nb" id="nav-meal" onclick="switchTo('meal')">
+    <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4a4 4 0 008 0V2M12 10v12M6 2v2M18 2v2"/></svg>
+    Meals
+  </button>
+  <button class="nb" id="nav-act" onclick="switchTo('act')">
+    <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.5"/><path d="M7 21l3-6 2 2 3-4 3 5M6 13l2-4 4 2 2-4"/></svg>
+    Activity
+  </button>
+  <button class="nb" id="nav-wt" onclick="switchTo('wt')">
+    <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V6a4 4 0 018 0v2"/><line x1="12" y1="13" x2="12" y2="15"/></svg>
+    Weight
+  </button>
+  <button class="nb" id="nav-prof" onclick="switchTo('prof')">
+    <svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    Profile
+  </button>
+</div>
+</div>
+
+<script>
+var actRate=10,obAL=1.375,obGoal='lose',user={name:'Alex'};
+function selG(b){b.closest('.gender-grid').querySelectorAll('.gb').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
+function selAL(b,v){document.querySelectorAll('#ob3 .gb').forEach(x=>x.classList.remove('on'));b.classList.add('on');obAL=v;}
+function selGoal(b,g){document.querySelectorAll('#ob4 .gb').forEach(x=>x.classList.remove('on'));b.classList.add('on');obGoal=g;}
+function goOb(n){for(var i=1;i<=4;i++)document.getElementById('ob'+i).style.display='none';document.getElementById('ob'+n).style.display='block';}
+function finishOb(){
+  var name=document.getElementById('ob-name').value||'Alex';
+  var age=parseInt(document.getElementById('ob-age').value)||28;
+  var wt=parseFloat(document.getElementById('ob-wt').value)||72;
+  var ht=parseFloat(document.getElementById('ob-ht').value)||175;
+  var bmr=Math.round(10*wt+6.25*ht-5*age+5);
+  var tdee=Math.round(bmr*obAL);
+  var target=obGoal==='lose'?tdee-500:obGoal==='gain'?tdee+200:tdee;
+  document.getElementById('dash-greet').textContent='Good morning, '+name;
+  document.getElementById('prof-nm').textContent=name;
+  document.getElementById('prof-av').textContent=name[0].toUpperCase();
+  document.getElementById('prof-tdee').textContent='TDEE: '+tdee.toLocaleString()+' kcal/day';
+  document.getElementById('prof-gl').textContent='Goal: '+(obGoal==='lose'?'Lose weight':obGoal==='gain'?'Gain muscle':'Maintain');
+  document.getElementById('pf-name').value=name;document.getElementById('pf-age').value=age;
+  document.getElementById('pf-wt').value=wt;document.getElementById('pf-ht').value=ht;
+  document.getElementById('cal-goal-d').textContent=target.toLocaleString();
+  document.getElementById('pf-cal-goal').textContent=target.toLocaleString()+' kcal';
+  document.getElementById('s-ob').style.display='none';
+  document.getElementById('app').style.display='flex';
+}
+function switchTo(id){
+  document.querySelectorAll('#app .screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('s-'+id).classList.add('active');
+  var n=document.getElementById('nav-'+id);if(n)n.classList.add('on');
+}
+function switchDash(w,b){
+  document.querySelectorAll('.db').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.getElementById('dash-today').style.display=w==='today'?'block':'none';
+  document.getElementById('dash-progress').style.display=w==='progress'?'block':'none';
+}
+function selTb(b){b.closest('.tg').querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
+function goMs(n){
+  ['ms1','ms2','ms3'].forEach((id,i)=>document.getElementById(id).style.display=i+1===n?'block':'none');
+  if(n===2){var s=document.querySelector('.tb.on');document.getElementById('mtl').textContent=s?s.textContent:'Lunch';}
+}
+function resetMs(){goMs(1);document.getElementById('meal-txt').value='';}
+function addPr(){var t=document.querySelector('.pt'),b=t.querySelector('.add-r'),r=document.createElement('div');r.className='pr';r.innerHTML='<input value=""><input value="1" type="number"><input value="count"><button class="rm" onclick="this.closest(\'.pr\').remove()">×</button>';t.insertBefore(r,b);}
+function selAb(b,n,r){
+  document.querySelectorAll('.ab').forEach(x=>{x.classList.remove('on');x.querySelector('.ai').style.stroke='var(--t3)';x.querySelector('.al').style.color='';});
+  b.classList.add('on');b.querySelector('.ai').style.stroke='var(--rgb1)';b.querySelector('.al').style.color='var(--rgb1)';
+  actRate=r;document.getElementById('ahint').textContent='~'+r+' kcal/min estimate. Adjust as needed.';updAcal();
+}
+function updAcal(){var d=parseInt(document.getElementById('adur').value)||0;document.getElementById('acal').value=Math.round(d*actRate);}
+function calcStepCal(){var s=parseInt(document.getElementById('steps-inp').value)||0;document.getElementById('step-cal').value=Math.round(s*0.04);}
+function showActDone(){
+  var s=document.querySelector('.ab.on .al'),d=document.getElementById('adur').value,c=document.getElementById('acal').value;
+  document.getElementById('act-sum').textContent=(s?s.textContent:'Activity')+' · '+d+' min · '+c+' kcal';
+  document.getElementById('act-form').style.display='none';document.getElementById('act-done').style.display='block';
+}
+function resetAct(){document.getElementById('act-done').style.display='none';document.getElementById('act-form').style.display='block';}
+function adjWt(d){var v=parseFloat(document.getElementById('wt-val').value)||72;document.getElementById('wt-val').value=Math.round((v+d)*10)/10;}
+function saveWt(){var v=document.getElementById('wt-val').value;document.getElementById('wt-sum').textContent=v+' kg saved';document.getElementById('wt-form').style.display='none';document.getElementById('wt-done').style.display='block';}
+function resetWt(){document.getElementById('wt-done').style.display='none';document.getElementById('wt-form').style.display='block';}
+function selPG(b){b.closest('.gender-grid').querySelectorAll('.gb').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
+function saveProf(){
+  var name=document.getElementById('pf-name').value||'Alex';
+  var age=parseInt(document.getElementById('pf-age').value)||28;
+  var wt=parseFloat(document.getElementById('pf-wt').value)||72;
+  var ht=parseFloat(document.getElementById('pf-ht').value)||175;
+  var al=parseFloat(document.getElementById('pf-al').value)||1.375;
+  var gl=document.getElementById('pf-goal').value;
+  var tdee=Math.round((10*wt+6.25*ht-5*age+5)*al);
+  var target=gl==='lose'?tdee-500:gl==='gain'?tdee+200:tdee;
+  document.getElementById('prof-nm').textContent=name;
+  document.getElementById('prof-av').textContent=name[0].toUpperCase();
+  document.getElementById('prof-tdee').textContent='TDEE: '+tdee.toLocaleString()+' kcal/day';
+  document.getElementById('prof-gl').textContent='Goal: '+(gl==='lose'?'Lose weight':gl==='gain'?'Gain muscle':'Maintain');
+  document.getElementById('cal-goal-d').textContent=target.toLocaleString();
+  document.getElementById('pf-cal-goal').textContent=target.toLocaleString()+' kcal';
+  document.getElementById('dash-greet').textContent='Good morning, '+name;
+  var sv=document.getElementById('prof-saved');sv.style.display='block';setTimeout(()=>sv.style.display='none',2000);
+}
+var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],months=['January','February','March','April','May','June','July','August','September','October','November','December'],now=new Date();
+document.getElementById('dash-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
+</script>
