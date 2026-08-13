@@ -1,4 +1,4 @@
-const WINDOWS_DOWNLOAD = "https://github.com/VenkataAnnabathula/pdf-editor/releases/download/v0.4.0-beta/The-Caffeinate-0.4.0-windows-x64.exe";
+const WINDOWS_DOWNLOAD = "https://github.com/VenkataAnnabathula/fitness-tracker/releases/download/v0.4.0-beta/The-Caffeinate-0.4.0-windows-x64.exe";
 
 const features = [
   { number: "01", title: "Edit text for free", copy: "Fix embedded PDF text, add notes, highlight details, whiteout content, and preview the finished result—without a watermark." },
