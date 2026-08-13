@@ -1,4 +1,4 @@
-const WINDOWS_DOWNLOAD = "https://github.com/VenkataAnnabathula/fitness-tracker/releases/download/v0.4.0-beta/The-Caffeinate-0.4.0-windows-x64.exe";
+const WINDOWS_DOWNLOAD = "https://github.com/VenkataAnnabathula/fitness-tracker/releases/download/v0.5.0-beta/The-Caffeinate-0.5.0-windows-x64.exe";
 
 const features = [
   { number: "01", title: "Edit text for free", copy: "Fix embedded PDF text, add notes, highlight details, whiteout content, and preview the finished result—without a watermark." },
@@ -33,9 +33,9 @@ export default function Home() {
     <main id="top">
       <section className="hero section-pad">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="pulse" /> Private PDF tools for Mac &amp; Windows</div>
-          <h1>Edit PDFs for free.<br/><em>Keep them private.</em></h1>
-          <p className="hero-lede">Fix text without a subscription. Upgrade to private OCR and turn scanned documents into clean, AI-ready text and Markdown—entirely on your computer.</p>
+          <div className="eyebrow"><span className="pulse" /> Private PDF editing + AI-ready extraction</div>
+          <h1>Wake up your PDFs.<br/><em>Keep them private.</em></h1>
+          <p className="hero-lede">Edit PDF text for free. Turn scanned documents into clean, AI-ready text and Markdown with Pro—entirely on your computer.</p>
           <div className="hero-actions">
             <a className="primary-button" href="#download">Download free beta <span>↓</span></a>
             <a className="text-button" href="#privacy">See how privacy works <Arrow /></a>
@@ -76,7 +76,7 @@ export default function Home() {
       </section>
 
       <section className="ai-section section-pad" id="ai-ready">
-        <div className="ai-copy"><span className="section-label">Built for the AI workflow</span><h2>Send the signal.<br/><em>Leave out the noise.</em></h2><p>A scanned PDF is useful to read, but awkward to reuse. The Caffeinate Pro extracts it locally, keeps the structure that matters, and lets you choose only the pages you need.</p><ul><li>Export clean plain text for simple prompts</li><li>Export structured Markdown with headings and lists</li><li>Remove repeated headers, footers, and page numbers</li><li>See an approximate token estimate before export</li></ul><small>Cleaner input can reduce unnecessary AI token usage. Actual token counts vary by model.</small></div>
+        <div className="ai-copy"><span className="section-label">Built for your AI workflow</span><h2>Give AI the document.<br/><em>Leave out the clutter.</em></h2><p>The Caffeinate Pro turns scanned PDFs into reusable text locally. Choose only the pages you need, clean repeated noise, then use the result with the AI tool you already prefer.</p><ul><li>Export clean plain text for simple prompts</li><li>Export structured Markdown with headings and lists</li><li>Remove repeated headers, footers, and page numbers</li><li>See an approximate token estimate before export</li></ul><small>Cleaner input can reduce unnecessary AI token usage. Actual token counts vary by model.</small></div>
         <div className="ai-card" aria-label="AI-ready export preview"><div className="ai-card-top"><span>AI-READY EXPORT</span><b>Processed locally</b></div><div className="ai-file"><span>annual-report.pdf</span><b>86 pages</b></div><div className="ai-arrow">↓</div><div className="ai-output"><div><span>SELECTED</span><b>14 pages</b></div><div><span>CLEAN TEXT</span><b>18,420 words</b></div><div><span>ESTIMATED INPUT</span><b>≈ 25,000 tokens</b></div></div><div className="ai-removed"><span>✓ Repeated headers removed</span><span>✓ Page numbers removed</span><span>✓ Saved as .md or .txt</span></div></div>
       </section>
 
@@ -84,7 +84,7 @@ export default function Home() {
         <div className="section-heading"><div><span className="section-label">Simple plans</span><h2>Start free.<br/>Pay when work gets serious.</h2></div><p>Privacy is included in every plan. Pro tools are unlocked during beta so you can help us make them excellent before paid licenses launch.</p></div>
         <div className="pricing-grid">
           <article><span className="plan-name">FREE</span><h3>$0</h3><p>Forever</p><ul><li>Edit embedded PDF text</li><li>Annotate, highlight, and sign</li><li>Rotate and remove pages</li><li>Preview and export without watermarks</li><li>Local processing</li></ul><a href="#download">Download free <Arrow/></a></article>
-          <article className="featured-plan"><div className="founding-badge">FOUNDING PRICE</div><span className="plan-name">PRO</span><h3>$29</h3><p>One-time at launch</p><ul><li>Everything in Free</li><li>Private OCR for scanned PDFs</li><li>AI-ready TXT and Markdown</li><li>Merge, split, compress, and convert</li><li>Batch tools and document security</li></ul><a href="mailto:hello@thecaffeinate.com?subject=The%20Caffeinate%20Founding%20Pro">Reserve founding Pro <Arrow/></a><small>Planned regular price: $49. No payment is collected during beta.</small></article>
+          <article className="featured-plan"><div className="founding-badge">FOUNDING PRICE</div><span className="plan-name">PRO</span><h3>$29</h3><p>One-time at launch</p><ul><li>Everything in Free</li><li>Private OCR for scanned PDFs</li><li>AI-ready TXT and Markdown</li><li>Merge, split, compress, and convert</li><li>Batch tools and document security</li></ul><a href="mailto:hello@thecaffeinate.com?subject=The%20Caffeinate%20Founding%20Pro">Reserve founding Pro <Arrow/></a><small>Planned regular price: $49. Pro tools are unlocked and no payment is collected during beta.</small></article>
           <article><span className="plan-name">BUSINESS</span><h3>Let’s talk</h3><p>For teams of 5+</p><ul><li>Everything in Pro</li><li>Volume and offline licensing</li><li>MSI and PKG deployment</li><li>Managed updates and invoicing</li><li>Priority support</li></ul><a href="mailto:hello@thecaffeinate.com?subject=The%20Caffeinate%20Business">Contact us <Arrow/></a></article>
         </div>
       </section>
@@ -105,9 +105,9 @@ export default function Home() {
       </section>
 
       <section className="download-section section-pad" id="download">
-        <div className="download-copy"><span className="section-label light">Version 0.4.0 · Free Windows beta</span><h2>Your private PDF workspace is ready.</h2><p>Edit text for free and test Pro tools while they are unlocked during beta. Your feedback will shape the paid launch.</p><div className="beta-warning">The Windows beta is currently unsigned, so Windows may show a security warning. The Mac release will follow after licensing, signing, and notarization are ready.</div></div>
+        <div className="download-copy"><span className="section-label light">Version 0.5.0 · Free Windows beta</span><h2>Your private PDF workspace is ready.</h2><p>Edit text for free and test Pro tools while they are unlocked during beta. Your feedback will shape the paid launch.</p><div className="beta-warning">The Windows beta is currently unsigned, so Windows may show a security warning. The Mac release will follow after signing and notarization are ready.</div></div>
         <div className="download-cards">
-          <div className="download-card coming-soon-card" aria-label="Mac version coming soon"><span className="platform-icon apple">●</span><div><small>MACOS · APPLE SILICON</small><b>Mac version coming soon</b><em>Waiting for licensing, signing, and notarization</em></div><span className="soon-pill">SOON</span></div>
+          <div className="download-card coming-soon-card" aria-label="Mac version coming soon"><span className="platform-icon apple">●</span><div><small>MACOS · APPLE SILICON</small><b>Mac version coming soon</b><em>Waiting for signing and notarization</em></div><span className="soon-pill">SOON</span></div>
           <a href={WINDOWS_DOWNLOAD} className="download-card"><span className="platform-icon windows"><i/><i/><i/><i/></span><div><small>FOR 64-BIT WINDOWS</small><b>Download for Windows</b><em>Windows 10 or 11 · 42 MB</em></div><Arrow/></a>
           <p>By downloading, you agree to the <a href="/terms">beta terms</a>. Need help? <a href="mailto:hello@thecaffeinate.com">hello@thecaffeinate.com</a></p>
         </div>
