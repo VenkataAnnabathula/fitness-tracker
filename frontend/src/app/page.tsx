@@ -1,9 +1,9 @@
-const WINDOWS_DOWNLOAD = "https://github.com/VenkataAnnabathula/fitness-tracker/releases/download/v0.5.0-beta/The-Caffeinate-0.5.0-windows-x64.exe";
+const WINDOWS_DOWNLOAD = "https://github.com/VenkataAnnabathula/fitness-tracker/releases/download/v0.6.0-beta/The-Caffeinate-0.6.0-windows-x64.exe";
 
 const features = [
   { number: "01", title: "Edit text for free", copy: "Fix embedded PDF text, add notes, highlight details, whiteout content, and preview the finished result—without a watermark." },
   { number: "02", title: "Organize anything", copy: "Merge documents, split page ranges, rotate pages, remove what you do not need, and export a clean new copy." },
-  { number: "03", title: "Extract for AI", copy: "Use private OCR to turn scanned documents into focused TXT or structured Markdown for search, notes, and AI workflows." },
+  { number: "03", title: "Extract for AI", copy: "Use bundled offline OCR to turn scanned documents into focused TXT or structured Markdown—no separate setup or model download." },
   { number: "04", title: "Convert and compress", copy: "Convert images and PDF pages or shrink image-heavy documents, entirely on your computer." },
 ];
 
@@ -35,7 +35,7 @@ export default function Home() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="pulse" /> Private PDF editing + AI-ready extraction</div>
           <h1>Wake up your PDFs.<br/><em>Keep them private.</em></h1>
-          <p className="hero-lede">Edit PDF text for free. Turn scanned documents into clean, AI-ready text and Markdown with Pro—entirely on your computer.</p>
+          <p className="hero-lede">Edit PDF text for free. Turn scanned documents into clean, AI-ready text and Markdown with bundled offline OCR—entirely on your computer.</p>
           <div className="hero-actions">
             <a className="primary-button" href="#download">Download free beta <span>↓</span></a>
             <a className="text-button" href="#privacy">See how privacy works <Arrow /></a>
@@ -84,7 +84,7 @@ export default function Home() {
         <div className="section-heading"><div><span className="section-label">Simple plans</span><h2>Start free.<br/>Pay when work gets serious.</h2></div><p>Privacy is included in every plan. Pro tools are unlocked during beta so you can help us make them excellent before paid licenses launch.</p></div>
         <div className="pricing-grid">
           <article><span className="plan-name">FREE</span><h3>$0</h3><p>Forever</p><ul><li>Edit embedded PDF text</li><li>Annotate, highlight, and sign</li><li>Rotate and remove pages</li><li>Preview and export without watermarks</li><li>Local processing</li></ul><a href="#download">Download free <Arrow/></a></article>
-          <article className="featured-plan"><div className="founding-badge">FOUNDING PRICE</div><span className="plan-name">PRO</span><h3>$29</h3><p>One-time at launch</p><ul><li>Everything in Free</li><li>Private OCR for scanned PDFs</li><li>AI-ready TXT and Markdown</li><li>Merge, split, compress, and convert</li><li>Batch tools and document security</li></ul><a href="mailto:hello@thecaffeinate.com?subject=The%20Caffeinate%20Founding%20Pro">Reserve founding Pro <Arrow/></a><small>Planned regular price: $49. Pro tools are unlocked and no payment is collected during beta.</small></article>
+          <article className="featured-plan"><div className="founding-badge">FOUNDING PRICE</div><span className="plan-name">PRO</span><h3>$29</h3><p>One-time at launch</p><ul><li>Everything in Free</li><li>Bundled offline OCR—no setup</li><li>AI-ready TXT and Markdown</li><li>Merge, split, compress, and convert</li><li>Batch tools and document security</li></ul><a href="mailto:hello@thecaffeinate.com?subject=The%20Caffeinate%20Founding%20Pro">Reserve founding Pro <Arrow/></a><small>Planned regular price: $49. Pro tools are unlocked and no payment is collected during beta.</small></article>
           <article><span className="plan-name">BUSINESS</span><h3>Let’s talk</h3><p>For teams of 5+</p><ul><li>Everything in Pro</li><li>Volume and offline licensing</li><li>MSI and PKG deployment</li><li>Managed updates and invoicing</li><li>Priority support</li></ul><a href="mailto:hello@thecaffeinate.com?subject=The%20Caffeinate%20Business">Contact us <Arrow/></a></article>
         </div>
       </section>
@@ -105,10 +105,10 @@ export default function Home() {
       </section>
 
       <section className="download-section section-pad" id="download">
-        <div className="download-copy"><span className="section-label light">Version 0.5.0 · Free Windows beta</span><h2>Your private PDF workspace is ready.</h2><p>Edit text for free and test Pro tools while they are unlocked during beta. Your feedback will shape the paid launch.</p><div className="beta-warning">The Windows beta is currently unsigned, so Windows may show a security warning. The Mac release will follow after signing and notarization are ready.</div></div>
+        <div className="download-copy"><span className="section-label light">Version 0.6.0 · Free Windows beta</span><h2>Your private PDF workspace is ready.</h2><p>Edit text for free and test install-free OCR and other Pro tools while they are unlocked during beta. Your feedback will shape the paid launch.</p><div className="beta-warning">The Windows beta is currently unsigned, so Windows may show a security warning. The Mac release will follow after signing and notarization are ready.</div></div>
         <div className="download-cards">
           <div className="download-card coming-soon-card" aria-label="Mac version coming soon"><span className="platform-icon apple">●</span><div><small>MACOS · APPLE SILICON</small><b>Mac version coming soon</b><em>Waiting for signing and notarization</em></div><span className="soon-pill">SOON</span></div>
-          <a href={WINDOWS_DOWNLOAD} className="download-card"><span className="platform-icon windows"><i/><i/><i/><i/></span><div><small>FOR 64-BIT WINDOWS</small><b>Download for Windows</b><em>Windows 10 or 11 · 42 MB</em></div><Arrow/></a>
+          <a href={WINDOWS_DOWNLOAD} className="download-card"><span className="platform-icon windows"><i/><i/><i/><i/></span><div><small>FOR 64-BIT WINDOWS</small><b>Download for Windows</b><em>Windows 10 or 11 · 134 MB · OCR included</em></div><Arrow/></a>
           <p>By downloading, you agree to the <a href="/terms">beta terms</a>. Need help? <a href="mailto:hello@thecaffeinate.com">hello@thecaffeinate.com</a></p>
         </div>
       </section>
