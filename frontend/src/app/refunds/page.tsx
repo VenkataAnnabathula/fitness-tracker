@@ -1,8 +1,8 @@
 import { LegalPage } from "@/components/LegalPage";
 
-export const metadata={title:"Refunds"};
-export default function Refunds(){return <LegalPage label="Purchase policy" title="Simple, fair refunds.">
-  <p>The current public beta is free, so no payment or refund is required.</p>
-  <h2>When paid plans launch</h2><p>Before we begin accepting payments, this page will state the exact refund window, eligible purchases, license-transfer rules, and how to request a refund. Those terms will be visible before checkout.</p>
-  <h2>Questions</h2><p>If you believe you were charged by The Caffeinate or have a purchase question, contact <a href="mailto:hello@thecaffeinate.com">hello@thecaffeinate.com</a> with the email used for the purchase.</p>
+export const metadata={title:"Payments"};
+export default function Refunds(){return <LegalPage label="Payment policy" title="The application is free.">
+ <p>The Caffeinate does not sell feature tiers, premium licenses, or paid exports. There is therefore no application purchase to refund.</p>
+ <h2>Affiliate purchases</h2><p>If you buy something from a third-party sponsor or affiliate, that seller&apos;s checkout, terms, and refund policy apply. The Caffeinate does not process that payment.</p>
+ <h2>Incorrect charges</h2><p>If a charge specifically identifies The Caffeinate, contact <a href="mailto:hello@thecaffeinate.com">hello@thecaffeinate.com</a> with the date and description. Do not email full card or bank details.</p>
  </LegalPage>}
