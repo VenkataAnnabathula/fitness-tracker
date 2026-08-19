@@ -1,3 +1,21 @@
+# The Caffeinate
+
+The public website and browser-local PDF editor for [thecaffeinate.com](https://thecaffeinate.com).
+
+The editor lives in `frontend/src/app/editor`, runs the official MuPDF.js WebAssembly package entirely in the browser, and does not upload selected PDFs to The Caffeinate. It supports continuous preview, search/replace, highlighting, adding text, page organization, merging, text extraction, and PDF export.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The MuPDF-powered web editor and this repository are licensed under GNU AGPL v3 or later. See [LICENSE](LICENSE).
+
+## Legacy prototype
+
+The repository originally contained the fitness-tracker proof of concept documented below. It is not part of the deployed Caffeinate website.
+
 # Fitness Tracker — POC
 
 A personal calorie and fitness tracker built as a mobile-first web application.
