@@ -11,7 +11,7 @@ type PDFPage = MuPDFType.PDFPage;
 type PagePreview = { index: number; url: string; width: number; height: number };
 type Notice = { kind: "success" | "error" | "info"; text: string } | null;
 
-const SOURCE_URL = "https://github.com/VenkataAnnabathula/fitness-tracker/tree/main/frontend";
+const SOURCE_URL = "https://github.com/VenkataAnnabathula/the-caffeinate/tree/main/frontend";
 
 function BrandMark() {
   return <span className="brand-mark" aria-hidden="true"><i/><i/><i/></span>;

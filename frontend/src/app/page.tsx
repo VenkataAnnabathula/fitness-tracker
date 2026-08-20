@@ -1,7 +1,7 @@
 import { AdSlot } from "@/components/AdSlot";
 import Script from "next/script";
 
-const WINDOWS_DOWNLOAD="https://github.com/VenkataAnnabathula/fitness-tracker/releases/download/v0.6.0-beta/The-Caffeinate-0.6.0-windows-x64.exe";
+const WINDOWS_DOWNLOAD="https://github.com/VenkataAnnabathula/the-caffeinate/releases/download/v0.6.0-beta/The-Caffeinate-0.6.0-windows-x64.exe";
 const SOURCE_URL=process.env.NEXT_PUBLIC_SOURCE_URL;
 
 const features=[
@@ -21,7 +21,8 @@ const privacyFacts=[
 function BrandMark(){return <span className="brand-mark" aria-hidden="true"><i/><i/><i/></span>}
 function Arrow(){return <span aria-hidden="true">↗</span>}
 
-export default function Home(){return <div className="site-shell">
+export default function Home(){const softwareJsonLd={"@context":"https://schema.org","@type":"WebApplication",name:"The Caffeinate PDF Editor",url:"https://www.thecaffeinate.com/editor",applicationCategory:"BusinessApplication",operatingSystem:"Any modern web browser",description:"A free, browser-local PDF editor for editing, organizing, merging, splitting, and extracting text without uploading documents.",offers:{"@type":"Offer",price:"0",priceCurrency:"USD"}};return <div className="site-shell">
+ <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(softwareJsonLd)}}/>
  <Script id="caffeinate-adsense" data-caffeinate-adsense="true" async crossOrigin="anonymous" strategy="afterInteractive" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8564697000875693"/>
  <div className="free-banner">100% free · No watermarks · No premium feature gates</div>
  <header className="nav-wrap"><a className="wordmark" href="#top"><BrandMark/><span>The Caffeinate</span></a><nav aria-label="Main navigation"><a href="/editor">Web editor</a><a href="#features">Features</a><a href="#ai-ready">AI-ready</a><a href="#privacy">Privacy</a></nav><a className="nav-cta" href="/editor">Edit a PDF <Arrow/></a></header>
