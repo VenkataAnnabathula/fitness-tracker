@@ -1,7 +1,7 @@
-export const dynamic="force-dynamic";
+export const dynamic="force-static";
 
 export function GET(){
-  const publisher=process.env.ADSENSE_PUBLISHER_ID?.replace(/^pub-/,"");
-  const body=publisher?`google.com, pub-${publisher}, DIRECT, f08c47fec0942fa0\n`:`# AdSense publisher ID has not been configured.\n`;
-  return new Response(body,{headers:{"content-type":"text/plain; charset=utf-8","cache-control":"public, max-age=3600"}});
+  return new Response("google.com, pub-8564697000875693, DIRECT, f08c47fec0942fa0\n",{
+    headers:{"content-type":"text/plain; charset=utf-8","cache-control":"public, max-age=86400"},
+  });
 }
